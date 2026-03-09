@@ -1,27 +1,11 @@
 public class R09_LCK00_J {
     public class SomeObject {
+  private final Object lock = new Object(); // private final lock object
 
-        // Locks on the object's monitor
-        public synchronized void changeValue() { 
-          // ...
-        }
-       
-        public static SomeObject lookup(String name) {
-          // ...
-        }
-      }
-      
-      // Untrusted code
-      String name = // ...
-      SomeObject someObject = SomeObject.lookup(name);
-      if (someObject == null) {
-        // ... handle error
-      }
-      synchronized (someObject) {
-        while (true) {
-          // Indefinitely lock someObject
-          Thread.sleep(Integer.MAX_VALUE); 
-        }
-      }
-      
+  public void changeValue() {
+    synchronized (lock) { // Locks on the private Object
+      // ...
+    }
+  }
+}
 }
